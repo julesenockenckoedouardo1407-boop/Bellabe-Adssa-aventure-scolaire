@@ -1,23 +1,32 @@
-# Bellabe Adssa — L'Aventure Scolaire
+# Bellabe Adssa — L’Aventure Scolaire v2
 
-Première base interactive Android/PWA du projet.
+Version mobile/PWA.
 
-## Inclus
-- Écran de premier lancement avec le message officiel
-- Accueil
-- Carte de l'aventure
-- Première mission et progression
-- XP, pièces et badge
-- Coin des défis : nombres, mots, mémoire, détective
-- Espace Travail avec feuille libre
-- Enregistrement du brouillon en local
-- Impression / génération PDF via la boîte d'impression Android
-- Profil et progression
-- Manifest PWA et service worker
-- Icône de base
+## GitHub depuis mobile
+Tous les fichiers sont directement à la racine. Aucun sous-dossier `icons/` n'est nécessaire.
 
-## Lancer
-Ouvrir `index.html` dans un navigateur moderne ou servir le dossier avec un petit serveur web pour activer le service worker.
+Fichiers :
+- index.html
+- styles.css
+- app.js
+- manifest.json
+- sw.js
+- icon.svg
+- README.md
 
-## Important
-Cette version est une base fonctionnelle du concept. Les illustrations finales des personnages, Twesy, la carte complète, les animations avancées et l'intégration IA réelle pourront être ajoutées dans les prochaines versions.
+## Nouveautés v2
+- Création/personnalisation de l’avatar
+- Prénom, coiffure et tenue
+- Twesy et indices
+- Carte d’aventure
+- Chambre personnelle
+- Inventaire
+- Mini-jeux
+- XP, pièces, niveaux et badges
+- Feuille de travail avec sauvegarde
+- Impression / PDF
+- PWA + service worker
+- Icône directement à la racine
+
+## GitHub Pages
+Après l’envoi, aller dans Settings > Pages, choisir la branche principale et `/(root)`.
