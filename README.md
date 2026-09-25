@@ -1,17 +1,6 @@
-# Bellabe Adssa v4.2
-
+# Bellabe Adssa — L’Aventure Scolaire v4.3
 Version mobile GitHub, sans sous-dossiers.
 
-Téléverser séparément à la racine : index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md.
-Puis GitHub → Settings → Pages → Deploy from branch → main → /(root).
+Fichiers à envoyer séparément à la racine du dépôt : index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md.
 
-Nouveautés v4 : maison personnalisable, compagnon, décoration, carte enrichie, progression, avatars, missions, mini-jeux et espace Travail.
-
-Les données de progression sont stockées localement dans le navigateur. L’impression permet aussi « Enregistrer au format PDF » selon le navigateur.
-
-## v4.1 — correction écran blanc
-Cette version corrige un conflit avec l'objet navigateur `window.screen` qui pouvait empêcher l'affichage sur certains téléphones. Elle conserve aussi les données de l'ancienne v4 lorsqu'elles existent.
-
-
-### v4.2 — correctif de chargement
-Cette version force le navigateur à récupérer le nouveau JavaScript et renouvelle le cache du service worker pour éviter que GitHub Pages ne serve une ancienne version.
+Cette version rend les aventures et les six mini-jeux interactifs et utilise un gestionnaire de boutons unique pour être plus fiable sur mobile. Le service worker utilise un nouveau cache v4.3.
