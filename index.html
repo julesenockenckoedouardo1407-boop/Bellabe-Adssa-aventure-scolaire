@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#6c63ff">
+  <meta name="description" content="Bellabe Adssa — L'Aventure Scolaire">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <title>Bellabe Adssa — L'Aventure Scolaire</title>
+</head>
+<body>
+  <div id="app">
+    <section id="welcome" class="screen welcome-screen">
+      <div class="stars">✦ ✧ ✦</div>
+      <div class="mascot">✨</div>
+      <h1>Bellabe Adssa</h1>
+      <h2>L'Aventure Scolaire</h2>
+      <p class="welcome-text">Bienvenue dans l'aventure scolaire de Bellabe Adssa Twesy !!!</p>
+      <button class="primary" data-action="start">🚀 Commencer l'aventure</button>
+    </section>
+
+    <section id="home" class="screen hidden">
+      <header class="topbar">
+        <div>
+          <strong>Bellabe Adssa</strong>
+          <small id="playerLevel">Niveau 1 · Explorateur</small>
+        </div>
+        <div class="stats"><span>⭐ <b id="xp">0</b></span><span>🪙 <b id="coins">0</b></span></div>
+      </header>
+
+      <main class="content">
+        <div class="hero-card">
+          <div class="hero-avatar" id="heroAvatar">🧒</div>
+          <div>
+            <h2 id="greeting">Bienvenue, aventurier !</h2>
+            <p>Twesy t'attend pour ta prochaine mission.</p>
+          </div>
+          <div class="twesy">✨</div>
+        </div>
+
+        <div class="mission-card">
+          <span class="badge">MISSION 1</span>
+          <h2>🏫 Découvre ton école</h2>
+          <p>Explore les premiers lieux de Bellabe Adssa et relève ton premier défi.</p>
+          <button class="primary" data-action="mission">🎯 Commencer la mission</button>
+        </div>
+
+        <div class="grid">
+          <button class="tile" data-action="adventure">🗺️<b>Aventure</b><small>Carte et missions</small></button>
+          <button class="tile" data-action="work">📝<b>Travail</b><small>Feuille libre</small></button>
+          <button class="tile" data-action="games">🎮<b>Jeux</b><small>Défis éducatifs</small></button>
+          <button class="tile" data-action="profile">👤<b>Profil</b><small>Progression</small></button>
+        </div>
+      </main>
+    </section>
+
+    <section id="adventure" class="screen hidden">
+      <header class="page-header"><button data-action="home">←</button><h2>🗺️ L'Aventure</h2></header>
+      <main class="content">
+        <div class="map">
+          <div class="zone unlocked">🏫<b>Campus</b><small>Départ</small></div>
+          <div class="path">↓</div>
+          <div class="zone unlocked">🌱<b>Village des Débutants</b><small>3 missions</small></div>
+          <div class="path">↓</div>
+          <div class="zone locked">📚<b>Forêt des Mots</b><small>🔒 À débloquer</small></div>
+          <div class="path">↓</div>
+          <div class="zone locked">🔢<b>Vallée des Nombres</b><small>🔒 À débloquer</small></div>
+          <div class="path">↓</div>
+          <div class="zone locked">🔬<b>Île des Découvertes</b><small>🔒 À débloquer</small></div>
+        </div>
+      </main>
+    </section>
+
+    <section id="mission" class="screen hidden">
+      <header class="page-header"><button data-action="home">←</button><h2>🎯 Mission 1</h2></header>
+      <main class="content">
+        <div class="story-card">
+          <div class="twesy-big">✨</div>
+          <p><b>Twesy :</b> « Bonjour, aventurier ! Avant de partir explorer le monde, découvrons ensemble ton école. »</p>
+        </div>
+        <div class="progress"><span id="missionProgress"></span></div>
+        <div id="challenge" class="challenge-card"></div>
+      </main>
+    </section>
+
+    <section id="work" class="screen hidden">
+      <header class="page-header"><button data-action="home">←</button><h2>📝 Travail</h2></header>
+      <main class="content">
+        <div class="paper-tools">
+          <input id="workTitle" placeholder="Titre du devoir">
+          <button data-action="saveDraft">💾 Enregistrer le brouillon</button>
+          <button data-action="print">🖨️ Imprimer / PDF</button>
+        </div>
+        <textarea id="freeSheet" placeholder="Écris ton devoir ici..."></textarea>
+        <p class="hint">Ton brouillon est conservé sur cet appareil.</p>
+      </main>
+    </section>
+
+    <section id="games" class="screen hidden">
+      <header class="page-header"><button data-action="home">←</button><h2>🎮 Coin des Défis</h2></header>
+      <main class="content">
+        <div class="grid">
+          <button class="tile" data-action="numberGame">🔢<b>Course des Nombres</b><small>Calcul mental</small></button>
+          <button class="tile" data-action="wordGame">🔤<b>Mot Mystère</b><small>Vocabulaire</small></button>
+          <button class="tile" data-action="memoryGame">🧠<b>Mémoire</b><small>Concentration</small></button>
+          <button class="tile" data-action="detective">🔎<b>Mission Détective</b><small>Logique</small></button>
+        </div>
+      </main>
+    </section>
+
+    <section id="game" class="screen hidden">
+      <header class="page-header"><button data-action="games">←</button><h2 id="gameTitle">🎮 Défi</h2></header>
+      <main class="content"><div id="gameContent" class="challenge-card"></div></main>
+    </section>
+
+    <section id="profile" class="screen hidden">
+      <header class="page-header"><button data-action="home">←</button><h2>👤 Profil</h2></header>
+      <main class="content">
+        <div class="profile-card"><div class="hero-avatar">🧒</div><h2>Ton Aventurier</h2><p id="profileStats"></p></div>
+        <div class="rewards"><h3>🏆 Badges</h3><div id="badges">Aucun badge pour le moment. Termine ta première mission !</div></div>
+      </main>
+    </section>
+  </div>
+  <script src="app.js"></script><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
+</body>
+</html>
