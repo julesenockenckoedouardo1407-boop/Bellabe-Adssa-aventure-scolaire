@@ -1,1 +1,17 @@
-{"name":"Bellabe Adssa — L’Aventure Scolaire v4","short_name":"Bellabe Adssa","start_url":".","display":"standalone","background_color":"#f8f7ff","theme_color":"#6657d9","lang":"fr","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "Bellabe Adssa — L’Aventure Scolaire v5.2",
+  "short_name": "Bellabe Adssa",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8f7ff",
+  "theme_color": "#6657d9",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

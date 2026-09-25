@@ -1,22 +1,24 @@
-# Bellabe Adssa v5.1 — L’Aventure Scolaire
+# Bellabe Adssa v5.2 — L’Aventure Scolaire
 
 Version mobile GitHub, sans sous-dossiers.
 
-## Nouveautés v5.1
-- Nouveau mini-jeu **🏃 Poursuis Louibenson**.
-- Course-poursuite tactile avec trois voies.
-- Contrôles ◀️ ▶️ sur téléphone et flèches du clavier.
-- Objectif : rattraper Louibenson en 30 secondes.
+## 🏃 Nouveau : Poursuis Louibenson
+- Course-poursuite tactile.
+- ⬅️ ➡️ pour changer de voie.
+- ⬆️ maintenu pour accélérer.
+- Jauge d'énergie ⚡.
+- Combo 🔥 pendant l'accélération sur la bonne voie.
+- Obstacles à éviter.
+- Décor de course animé pendant l'accélération.
+- Glisser à gauche/droite sur la piste pour changer de voie.
+- 30 secondes pour rattraper Louibenson.
 - Victoire : +30 XP et +10 pièces.
 - Échec : -10 XP.
-- Nouvelle page **⚙️ Paramètres > À propos**.
-- Mention affichée clairement : **Créé par maître Jules Enock**.
-- Contact : **+509 40409680**.
-- Toutes les aventures et mini-jeux de la v5.0 restent disponibles.
-- Nouveau cache/service worker v5.1.
+
+## Paramètres > À propos
+Créé par maître Jules Enock
+Contact : +509 40409680
 
 ## Installation GitHub mobile
-Téléverser séparément à la racine du dépôt :
+Téléverser séparément à la racine :
 index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md
-
-Puis utiliser GitHub Pages avec la branche `main` et le dossier `/(root)`.
