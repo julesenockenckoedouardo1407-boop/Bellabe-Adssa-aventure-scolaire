@@ -1,32 +1,7 @@
-# Bellabe Adssa — L’Aventure Scolaire v2
+# Bellabe Adssa — L’Aventure Scolaire v2.1
 
-Version mobile/PWA.
+Tous les fichiers sont à la racine : index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md.
 
-## GitHub depuis mobile
-Tous les fichiers sont directement à la racine. Aucun sous-dossier `icons/` n'est nécessaire.
+Sur GitHub, envoyer les 7 fichiers séparément, pas le ZIP. Puis activer GitHub Pages sur la branche utilisée et le dossier `/ (root)`.
 
-Fichiers :
-- index.html
-- styles.css
-- app.js
-- manifest.json
-- sw.js
-- icon.svg
-- README.md
-
-## Nouveautés v2
-- Création/personnalisation de l’avatar
-- Prénom, coiffure et tenue
-- Twesy et indices
-- Carte d’aventure
-- Chambre personnelle
-- Inventaire
-- Mini-jeux
-- XP, pièces, niveaux et badges
-- Feuille de travail avec sauvegarde
-- Impression / PDF
-- PWA + service worker
-- Icône directement à la racine
-
-## GitHub Pages
-Après l’envoi, aller dans Settings > Pages, choisir la branche principale et `/(root)`.
+La v2.1 utilise une nouvelle sauvegarde `bellabeV2_1` pour éviter les conflits avec l'ancienne v2.
