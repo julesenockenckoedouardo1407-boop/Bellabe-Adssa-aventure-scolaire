@@ -1,33 +1,10 @@
-# Bellabe Adssa — L’Aventure Scolaire v3
+# Bellabe Adssa v4
 
-## Installation GitHub depuis un téléphone
-Cette version est volontairement **sans aucun sous-dossier**.
+Version mobile GitHub, sans sous-dossiers.
 
-Téléverse séparément à la racine du dépôt les 7 fichiers :
-1. index.html
-2. styles.css
-3. app.js
-4. manifest.json
-5. sw.js
-6. icon.svg
-7. README.md
+Téléverser séparément à la racine : index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md.
+Puis GitHub → Settings → Pages → Deploy from branch → main → /(root).
 
-Ensuite : **Settings → Pages → Deploy from a branch → main → /(root) → Save**.
+Nouveautés v4 : maison personnalisable, compagnon, décoration, carte enrichie, progression, avatars, missions, mini-jeux et espace Travail.
 
-## Mini-jeux fonctionnels
-- Course des Nombres
-- Mot Mystère
-- Mission Détective
-- Tour de la Mémoire
-- Laboratoire
-- Atelier Créatif
-
-La progression est sauvegardée dans le navigateur. Les mini-jeux donnent XP et pièces.
-
-## Travail
-- brouillon local
-- téléchargement TXT
-- impression / « Enregistrer au format PDF » via la boîte d'impression du navigateur
-- aide de Twesy
-
-Si une ancienne version reste affichée, recharge GitHub Pages et vide le cache du navigateur.
+Les données de progression sont stockées localement dans le navigateur. L’impression permet aussi « Enregistrer au format PDF » selon le navigateur.
