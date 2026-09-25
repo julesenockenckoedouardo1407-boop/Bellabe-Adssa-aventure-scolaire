@@ -1,4 +1,4 @@
-# Bellabe Adssa v5.2 — L’Aventure Scolaire
+# Bellabe Adssa v5.3 — L’Aventure Scolaire
 
 Version mobile GitHub, sans sous-dossiers.
 
@@ -22,3 +22,14 @@ Contact : +509 40409680
 ## Installation GitHub mobile
 Téléverser séparément à la racine :
 index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md
+
+
+## v5.3 — Course façon endless runner
+- Décor qui défile et piste en perspective.
+- Course automatique vers l'avant.
+- ⬅️ / ➡️ changement de voie.
+- ⬆️ accélération maintenue avec énergie.
+- Obstacles et bonus à récupérer.
+- Combo et vitesse dynamique.
+- Contrôle tactile par glissement.
+- Objectif : rattraper Louibenson avant la fin du chrono.

@@ -52,21 +52,28 @@ function profile(){shell('👤 Mon Profil',`<section class="card"><div class="av
 function settings(){shell('⚙️ Paramètres',`<section class="card"><h3>ℹ️ À propos</h3><p><b>Bellabe Adssa — L’Aventure Scolaire</b></p><p>Une aventure éducative où l’on apprend en explorant, en jouant et en relevant des défis.</p><hr><p><b>Créé par maître Jules Enock</b></p><p>Contact : <a href="tel:+50940409680">+509 40409680</a></p></section><section class="card"><h3>💾 Données</h3><p>Ta progression est enregistrée sur cet appareil.</p></section>`)}
 function chase(){
   shell('🏃🏿‍♂️💨 Poursuis Louibenson',`
-    <section class="card chase-card">
-      <div class="notice"><b>Rattrape Louibenson !</b><br>⬅️➡️ change de voie · ⬆️ maintiens pour accélérer · évite les obstacles.</div>
+    <section class="card chase-card temple-run-card">
+      <div class="notice"><b>Rattrape Louibenson !</b><br>La course avance automatiquement. ⬅️➡️ change de voie · ⬆️ maintiens pour accélérer · glisse sur la piste.</div>
       <div class="chase-stats">
-        <b>⏱️ <span id="chaseTime">30</span>s</b>
-        <b>📏 <span id="chaseDist">100</span>m</b>
+        <b>⏱️ <span id="chaseTime">45</span>s</b>
+        <b>📏 <span id="chaseDist">120</span>m</b>
+        <b>🪙 <span id="chaseCoins">0</span></b>
         <b>⚡ <span id="chaseEnergy">100</span>%</b>
-        <b>🔥 x<span id="chaseCombo">0</span></b>
       </div>
-      <div class="chase-field" id="chaseField">
-        <div class="road-lines"></div>
-        <div id="chaseObstacle1" class="chase-obstacle">🪨</div>
-        <div id="chaseObstacle2" class="chase-obstacle">🌳</div>
-        <div id="chaseTarget" class="runner target">🏃🏿‍♂️</div>
-        <div id="chasePlayer" class="runner player">🧑🏿‍🎓</div>
-        <div class="chase-speed">💨</div>
+      <div class="runner-stage" id="chaseField">
+        <div class="sky"></div>
+        <div class="mountain m1"></div><div class="mountain m2"></div>
+        <div class="road">
+          <div class="lane-line l1"></div><div class="lane-line l2"></div>
+          <div id="chaseTarget" class="runner target">🏃🏿‍♂️</div>
+          <div id="chasePlayer" class="runner player">🧑🏿‍🎓</div>
+          <div id="chaseObstacle1" class="runner-object">🪨</div>
+          <div id="chaseObstacle2" class="runner-object">🌳</div>
+          <div id="chaseCoin1" class="runner-coin">🪙</div>
+          <div id="chaseCoin2" class="runner-coin">⭐</div>
+          <div class="speed-lines" id="speedLines"></div>
+        </div>
+        <div class="runner-hud">🔥 <span id="chaseCombo">0</span> · 🏃 <span id="chaseSpeed">1.0</span>x</div>
       </div>
       <div class="chase-controls">
         <button class="btn secondary" data-chase="left" aria-label="Aller à gauche">⬅️</button>
@@ -74,155 +81,152 @@ function chase(){
         <button class="btn secondary" data-chase="right" aria-label="Aller à droite">➡️</button>
       </div>
       <button class="btn primary chase-start" data-chase="start">▶️ Démarrer la course</button>
-      <p id="chaseMsg">Prépare-toi !</p>
+      <p id="chaseMsg">Prépare-toi à courir !</p>
     </section>`);
 
-  const box=$('screen'), st={
-    running:false, lane:1, targetLane:1, distance:100, time:30, score:0,
-    energy:100, combo:0, speed:0, boost:false, raf:null, last:0,
-    targetTick:0, obstacleTick:0, obstacle1:{lane:0,y:-20,active:false},
-    obstacle2:{lane:2,y:-120,active:false}, startLane:1, won:false
+  const box=$('screen');
+  const st={
+    running:false,lane:1,targetLane:1,distance:120,time:45,energy:100,combo:0,
+    speed:1,boost:false,raf:null,last:0,spawn:0,coinSpawn:0,targetMove:0,
+    obstacles:[{lane:0,z:-0.15,active:false,el:$('chaseObstacle1')},{lane:2,z:-0.55,active:false,el:$('chaseObstacle2')}],
+    coins:[{lane:1,z:-0.35,active:false,el:$('chaseCoin1')},{lane:0,z:-0.8,active:false,el:$('chaseCoin2')}],
+    target:$('chaseTarget'),player:$('chasePlayer'),field:$('chaseField'),won:false
   };
   box._chase=st;
-  const player=$('chasePlayer'), target=$('chaseTarget'),
-        obs1=$('chaseObstacle1'), obs2=$('chaseObstacle2'),
-        field=$('chaseField');
 
-  function laneLeft(l){return [16,50,84][l]+'%'}
+  const lanePct=[25,50,75];
+  function setLane(el,lane){el.style.left=lanePct[lane]+'%'}
+  function resetObject(o,coin=false){
+    o.active=true;o.lane=Math.floor(Math.random()*3);o.z=-0.05-Math.random()*0.25;
+    o.el.style.display='block';setLane(o.el,o.lane);
+    o.el.textContent=coin?(Math.random()<.65?'🪙':'⭐'):(Math.random()<.5?'🪨':'🌳');
+  }
+  function project(o){
+    const z=Math.max(0,Math.min(1,o.z));
+    const y=18+z*68;
+    const scale=.55+z*.75;
+    o.el.style.bottom=y+'%';
+    o.el.style.transform=`translateX(-50%) scale(${scale})`;
+    o.el.style.zIndex=20+Math.floor(z*50);
+  }
   function render(){
-    player.style.left=laneLeft(st.lane);
-    target.style.left=(70+st.targetLane*7)+'%';
+    setLane(st.player,st.lane);
+    st.target.style.left=(lanePct[st.targetLane]+(st.lane-st.targetLane)*2)+'%';
+    st.target.style.bottom='73%';
+    st.player.style.bottom='8%';
     $('chaseDist').textContent=Math.max(0,Math.ceil(st.distance));
     $('chaseTime').textContent=Math.max(0,Math.ceil(st.time));
     $('chaseEnergy').textContent=Math.round(st.energy);
-    $('chaseCombo').textContent=st.combo;
-    $('chaseScore').textContent && ($('chaseScore').textContent=Math.floor(st.score));
-    obs1.style.left=laneLeft(st.obstacle1.lane);
-    obs2.style.left=laneLeft(st.obstacle2.lane);
-    obs1.style.bottom=st.obstacle1.y+'px';
-    obs2.style.bottom=st.obstacle2.y+'px';
-    obs1.style.display=st.obstacle1.active?'block':'none';
-    obs2.style.display=st.obstacle2.active?'block':'none';
+    $('chaseCombo').textContent=Math.floor(st.combo);
+    $('chaseSpeed').textContent=st.speed.toFixed(1);
+    $('chaseCoins').textContent=st._coins||0;
+    st.obstacles.forEach(o=>{if(o.active)project(o);else o.el.style.display='none'});
+    st.coins.forEach(o=>{if(o.active)project(o);else o.el.style.display='none'});
+    st.field.classList.toggle('is-boosting',st.boost);
+    st.field.style.setProperty('--road-speed',Math.round(st.speed*100)+'ms');
   }
   function finish(win){
     if(!st.running)return;
-    st.running=false;
-    cancelAnimationFrame(st.raf);
-    S.games++;
+    st.running=false;cancelAnimationFrame(st.raf);S.games++;
+    const boost=document.querySelector('.chase-boost');if(boost)boost.classList.remove('boosting');
     if(win){
-      gain(30,10);
-      $('chaseMsg').textContent='🏆 RATTRAPÉ ! Tu as poursuivi Louibenson jusqu’au bout ! +30 XP · +10 🪙';
+      gain(40,15);$('chaseMsg').textContent='🏆 RATTRAPÉ ! Louibenson est enfin rattrapé ! +40 XP · +15 🪙';
     }else{
-      S.xp=Math.max(0,S.xp-10); S.combo=0; save();
-      $('chaseMsg').textContent='💨 Louibenson s’est échappé ! -10 XP. Réessaie avec l’accélération ⚡';
+      S.xp=Math.max(0,S.xp-10);S.combo=0;save();
+      $('chaseMsg').textContent='💨 Louibenson s’est échappé ! -10 XP. Accélère mieux la prochaine fois !';
     }
-    const startBtn=document.querySelector('.chase-start');
-    if(startBtn)startBtn.textContent='🔄 Recommencer';
-    const boost=document.querySelector('.chase-boost');
-    if(boost)boost.classList.remove('boosting');
+    const startBtn=document.querySelector('.chase-start');if(startBtn)startBtn.textContent='🔄 Recommencer';
     stats();
   }
   function hitObstacle(o){
     if(!o.active)return;
-    const playerY=28, hitBand=34;
-    if(o.y>playerY-hitBand && o.y<playerY+18 && o.lane===st.lane){
-      o.active=false;
-      st.energy=Math.max(0,st.energy-25);
-      st.distance=Math.min(100,st.distance+6);
-      st.combo=0;
-      toast('💥 Obstacle ! -25 ⚡ · +6 m');
+    if(o.z>.78 && o.z<1.03 && o.lane===st.lane){
+      o.active=false;o.el.style.display='none';st.energy=Math.max(0,st.energy-30);
+      st.distance=Math.min(120,st.distance+7);st.combo=0;
+      toast('💥 Obstacle ! -30 ⚡ · Louibenson reprend 7 m');
     }
   }
-  function spawn(o){
-    o.active=true; o.y=-25; o.lane=Math.floor(Math.random()*3);
+  function collectCoin(o){
+    if(!o.active)return;
+    if(o.z>.76 && o.z<1.04 && o.lane===st.lane){
+      o.active=false;o.el.style.display='none';st._coins=(st._coins||0)+1;
+      st.combo=Math.min(12,st.combo+1);st.distance=Math.max(0,st.distance-2);
+      toast('✨ Bonus récupéré ! -2 m · Combo +1');
+    }
   }
   function start(){
     if(st.running)return;
-    st.running=true; st.won=false; st.time=30; st.distance=100; st.score=0;
-    st.energy=100; st.combo=0; st.speed=0; st.boost=false; st.lane=1; st.targetLane=1;
-    st.targetTick=0; st.obstacleTick=0; st.obstacle1.active=false; st.obstacle2.active=false;
+    st.running=true;st.distance=120;st.time=45;st.energy=100;st.combo=0;st.speed=1;
+    st.boost=false;st.lane=1;st.targetLane=1;st.spawn=0;st.coinSpawn=0;st.targetMove=0;st._coins=0;
+    st.obstacles.forEach(o=>o.active=false);st.coins.forEach(o=>o.active=false);
     st.last=performance.now();
-    $('chaseMsg').textContent='🔥 Course lancée ! Maintiens ⬆️ pour accélérer.';
-    const startBtn=document.querySelector('.chase-start'); if(startBtn)startBtn.textContent='🏃 Course en cours…';
-    render();
+    $('chaseMsg').textContent='🔥 C’est parti ! Maintiens ⬆️ pour accélérer.';
+    const btn=document.querySelector('.chase-start');if(btn)btn.textContent='🏃 Course en cours…';
     function loop(now){
       if(!st.running)return;
-      const dt=Math.min(.05,(now-st.last)/1000); st.last=now;
-      st.time-=dt; st.targetTick+=dt; st.obstacleTick+=dt;
+      const dt=Math.min(.04,(now-st.last)/1000);st.last=now;
+      st.time-=dt;st.spawn+=dt;st.coinSpawn+=dt;st.targetMove+=dt;
 
-      if(st.targetTick>.65){
-        st.targetTick=0;
-        const choices=[0,1,2].filter(x=>x!==st.targetLane || Math.random()<.35);
-        st.targetLane=choices[Math.floor(Math.random()*choices.length)];
+      if(st.targetMove>.75){
+        st.targetMove=0;
+        st.targetLane=Math.floor(Math.random()*3);
       }
-      if(st.obstacleTick>1.0){
-        st.obstacleTick=0;
-        if(!st.obstacle1.active)spawn(st.obstacle1);
-        else if(!st.obstacle2.active)spawn(st.obstacle2);
+      if(st.spawn>1.15){
+        st.spawn=0;
+        const free=st.obstacles.find(o=>!o.active);
+        if(free)resetObject(free,false);
+      }
+      if(st.coinSpawn>1.45){
+        st.coinSpawn=0;
+        const free=st.coins.find(o=>!o.active);
+        if(free)resetObject(free,true);
       }
 
-      const accelerating=st.boost && st.energy>0;
-      const baseSpeed=3.0;
-      const boostSpeed=accelerating?4.8:0;
-      st.speed=baseSpeed+boostSpeed;
-
+      const accelerating=st.boost&&st.energy>0;
       if(accelerating){
-        st.energy=Math.max(0,st.energy-dt*24);
+        st.energy=Math.max(0,st.energy-dt*28);
+        st.speed=Math.min(2.4,st.speed+dt*.9);
       }else{
-        st.energy=Math.min(100,st.energy+dt*14);
+        st.energy=Math.min(100,st.energy+dt*16);
+        st.speed=Math.max(1,st.speed-dt*.55);
       }
-
       if(st.energy<=0)st.boost=false;
 
-      // Matching Louibenson's lane makes the chase more effective.
-      const sameLane=st.lane===st.targetLane;
-      const gapPenalty=sameLane?0:1.2;
-      let closing=(st.speed-gapPenalty)*dt;
-      if(st.boost && sameLane){st.combo=Math.min(9,st.combo+dt*1.8);closing+=st.combo*0.12*dt;}
-      else if(!sameLane)st.combo=0;
-      st.distance-=closing;
-      st.score+=Math.max(0,closing)*12;
+      const same=st.lane===st.targetLane;
+      const closing=(accelerating?2.2:1.05)+(same?.55:0)+st.combo*.025;
+      st.distance-=closing*dt;
+      if(accelerating&&same)st.combo=Math.min(12,st.combo+dt*2.2);
+      else if(!same)st.combo=Math.max(0,st.combo-dt*1.5);
 
-      for(const o of [st.obstacle1,st.obstacle2]){
+      [...st.obstacles,...st.coins].forEach(o=>{
         if(o.active){
-          o.y+=st.speed*dt*48;
-          hitObstacle(o);
-          if(o.y>330)o.active=false;
+          o.z+=dt*(.62+.18*st.speed);
+          if(o.z>1.15){o.active=false;o.el.style.display='none'}
         }
-      }
-
-      // Visual speed effect.
-      field.classList.toggle('is-boosting',accelerating);
+      });
+      st.obstacles.forEach(hitObstacle);st.coins.forEach(collectCoin);
       render();
 
-      if(st.distance<=0){st.distance=0;render();return finish(true)}
-      if(st.time<=0)return finish(false);
+      if(st.distance<=0){st.distance=0;render();finish(true);return}
+      if(st.time<=0){finish(false);return}
       st.raf=requestAnimationFrame(loop);
     }
     st.raf=requestAnimationFrame(loop);
   }
-  function move(d){
-    if(!st.running)return;
-    st.lane=Math.max(0,Math.min(2,st.lane+d));
-    render();
-  }
+  function move(d){if(!st.running)return;st.lane=Math.max(0,Math.min(2,st.lane+d));}
   function boost(on){
     if(!st.running)return;
-    st.boost=!!on && st.energy>0;
-    const btn=document.querySelector('.chase-boost');
-    if(btn)btn.classList.toggle('boosting',st.boost);
+    st.boost=!!on&&st.energy>0;
+    const b=document.querySelector('.chase-boost');if(b)b.classList.toggle('boosting',st.boost);
   }
-  box._chaseStart=start; box._chaseMove=move; box._chaseBoost=boost;
-  // Touch swipe support for mobile.
+  box._chaseStart=start;box._chaseMove=move;box._chaseBoost=boost;
   let touchX=null,touchY=null;
-  field.addEventListener('touchstart',e=>{
-    const t=e.touches[0]; touchX=t.clientX; touchY=t.clientY;
-  },{passive:true});
-  field.addEventListener('touchend',e=>{
+  st.field.addEventListener('touchstart',e=>{const t=e.touches[0];touchX=t.clientX;touchY=t.clientY},{passive:true});
+  st.field.addEventListener('touchend',e=>{
     if(touchX===null)return;
     const t=e.changedTouches[0],dx=t.clientX-touchX,dy=t.clientY-touchY;
-    if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1);
-    if(dy<-45)boost(true);
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1);
+    else if(dy<-35)boost(true);
     touchX=touchY=null;
   },{passive:true});
   render();
@@ -244,5 +248,5 @@ document.addEventListener('touchend',()=>{const box=$('screen');if(box&&box._cha
 document.addEventListener('keydown',e=>{const box=$('screen');if(!box||!box._chase||!box._chase.running)return;if(e.key==='ArrowLeft'){e.preventDefault();box._chaseMove(-1)}if(e.key==='ArrowRight'){e.preventDefault();box._chaseMove(1)}if(e.key==='ArrowUp'||e.key===' '){e.preventDefault();box._chaseBoost(true)}});
 document.addEventListener('keyup',e=>{const box=$('screen');if(!box||!box._chase||!box._chase.running)return;if(e.key==='ArrowUp'||e.key===' ')box._chaseBoost(false)});document.addEventListener('click',handle);stats();home();
 if(!localStorage.getItem('bellabeStarted')){localStorage.setItem('bellabeStarted','1');toast('🤖 Twesy : bienvenue !')}
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=52',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=53',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
 })();
