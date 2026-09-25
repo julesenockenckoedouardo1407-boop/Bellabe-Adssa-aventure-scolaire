@@ -1,4 +1,4 @@
-# Bellabe Adssa v4
+# Bellabe Adssa v4.2
 
 Version mobile GitHub, sans sous-dossiers.
 
@@ -11,3 +11,7 @@ Les données de progression sont stockées localement dans le navigateur. L’im
 
 ## v4.1 — correction écran blanc
 Cette version corrige un conflit avec l'objet navigateur `window.screen` qui pouvait empêcher l'affichage sur certains téléphones. Elle conserve aussi les données de l'ancienne v4 lorsqu'elles existent.
+
+
+### v4.2 — correctif de chargement
+Cette version force le navigateur à récupérer le nouveau JavaScript et renouvelle le cache du service worker pour éviter que GitHub Pages ne serve une ancienne version.
