@@ -1,23 +1,15 @@
-# Bellabe Adssa v4.4 — L’Aventure Scolaire
+# Bellabe Adssa v5.0 — L’Aventure Scolaire
 
-Version mobile GitHub, sans sous-dossiers.
+## Monde Vivant
+- Aventures narratives de 8 étapes.
+- Grande banque de questions existante + sélection aléatoire.
+- Bonne réponse : +10 XP. Mauvaise réponse : -5 XP et -1 vie.
+- 3 vies maximum et récupération d’une vie pour 8 pièces.
+- Série de réussites et trophées.
+- Défi du jour : +40 XP +15 pièces.
+- Boss/zones et progression conservés.
+- Mini-jeux v4.4 conservés et intégrés à la nouvelle progression.
+- Migration automatique des données v3/v4 quand disponibles.
+- Aucun sous-dossier requis.
 
-## Nouveautés v4.4
-- Aventures beaucoup plus longues : 5 questions par aventure.
-- 10 questions disponibles par zone, avec sélection aléatoire.
-- Zones : Campus, Français, Maths, Sciences, Histoire/Géographie, Créatif, Énigmes et Château.
-- Bonne réponse dans une aventure : +10 XP.
-- Mauvaise réponse : -5 XP (sans descendre sous 0 XP).
-- Fin d’aventure : bonus +30 XP et +10 pièces.
-- Déblocage progressif des zones.
-- Mini-jeux avec 5 défis par partie.
-- Mauvaise réponse dans les mini-jeux : -5 XP.
-- Tour de la Mémoire : une mauvaise paire coûte -5 XP.
-- Conservation des anciennes données v4/v3 quand elles existent.
-- Cache/service worker renouvelé en v4.4.
-
-## Installation GitHub mobile
-Téléverser séparément à la racine du dépôt :
-index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md
-
-Puis utiliser GitHub Pages avec la branche `main` et le dossier `/(root)`.
+Téléverser séparément les 7 fichiers à la racine du dépôt GitHub Pages.
