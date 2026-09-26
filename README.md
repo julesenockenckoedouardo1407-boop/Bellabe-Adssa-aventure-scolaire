@@ -1,4 +1,4 @@
-# Bellabe Adssa v5.3 — L’Aventure Scolaire
+# Bellabe Adssa v5.4 — L’Aventure Scolaire
 
 Version mobile GitHub, sans sous-dossiers.
 
@@ -21,10 +21,10 @@ Contact : +509 40409680
 
 ## Installation GitHub mobile
 Téléverser séparément à la racine :
-index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md
+index.html, styles.css, app.js, manifest.json, sw.js, icon.png, README.md
 
 
-## v5.3 — Course façon endless runner
+## v5.4 — Course façon endless runner
 - Décor qui défile et piste en perspective.
 - Course automatique vers l'avant.
 - ⬅️ / ➡️ changement de voie.
@@ -33,3 +33,13 @@ index.html, styles.css, app.js, manifest.json, sw.js, icon.svg, README.md
 - Combo et vitesse dynamique.
 - Contrôle tactile par glissement.
 - Objectif : rattraper Louibenson avant la fin du chrono.
+
+
+## v5.4 — Nouvelle icône + nettoyage des mini-jeux
+- Nouvelle icône officielle de Bellabe Adssa, basée sur le visuel fourni pour l'identité de l'application.
+- L'icône est `icon.png`, directement à la racine pour faciliter l'installation depuis GitHub mobile.
+- Le bouton **Poursuis Louibenson** est retiré de la liste des mini-jeux pour préparer une refonte complète ultérieure.
+- Les autres aventures et mini-jeux sont conservés.
+- La page Paramètres → À propos conserve :
+  **Créé par maître Jules Enock**
+  **Contact : +509 40409680**
