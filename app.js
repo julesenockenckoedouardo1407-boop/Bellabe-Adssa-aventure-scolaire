@@ -323,3 +323,16 @@ document.addEventListener('keyup',e=>{const box=$('screen');if(!box||!box._chase
 if(!localStorage.getItem('bellabeStarted')){localStorage.setItem('bellabeStarted','1');toast('🤖 Twesy : bienvenue !')}
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=53',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
 })();
+
+(function(){
+"use strict";
+function $(x){return document.getElementById(x)}
+function init(){
+if(!$("v7create"))return;
+$("v7create").onclick=function(){var p=BellabeChallenges.createProfile($("v7pseudo").value,$("v7pseudo").value);$("v7out").innerHTML="👤 Profil créé : <b>"+p.pseudo+"</b>"};
+$("v7join").onclick=function(){var c=BellabeChallenges.joinClass($("v7class").value);$("v7out").innerHTML="🏫 Classe : <b>"+c.code+"</b>"};
+$("v7challenge").onclick=function(){var c=BellabeChallenges.createChallenge($("v7cat").value);$("v7out").innerHTML="⚔️ Défi "+c.category+" créé — 10 questions — ID "+c.id};
+$("v7rank").onclick=function(){var r=BellabeChallenges.leaderboard();$("v7out").innerHTML=r.length?r.map(function(x,i){return (i+1)+". "+x.pseudo+" — "+x.score+" pts"}).join("<br>"):"Aucun élève enregistré."};
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
