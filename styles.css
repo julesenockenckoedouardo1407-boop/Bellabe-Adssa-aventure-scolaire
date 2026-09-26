@@ -43,3 +43,12 @@
 .chase-boost{touch-action:none;user-select:none}
 .chase-boost.boosting{transform:scale(1.04);filter:brightness(1.08);box-shadow:0 8px 22px rgba(92,75,220,.3)}
 @media(max-width:520px){.runner-stage{height:360px}.runner{font-size:42px}.runner.player{font-size:48px}.runner.target{font-size:34px}.runner-object{font-size:34px}}
+
+/* v5.5 — questions */
+.question-card{padding:18px;border-radius:22px;background:rgba(255,255,255,.95);box-shadow:0 8px 25px rgba(0,0,0,.08);margin-top:14px}
+.question-card h3{line-height:1.35;margin:10px 0 16px}
+.answers{display:grid;gap:10px}
+.answer-btn{text-align:left;border:2px solid #e7e3ff;border-radius:16px;background:#fff;padding:13px 15px;font-weight:700;font-size:15px;cursor:pointer}
+.answer-btn:active{transform:scale(.98)}
+.eyebrow{font-size:12px;font-weight:800;opacity:.7;text-transform:uppercase;letter-spacing:.04em}
+.library-row{display:flex;justify-content:space-between;padding:11px 4px;border-bottom:1px solid #eee}

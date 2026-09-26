@@ -48,6 +48,10 @@ function drawMcRound(st){const q=st.qs[st.i];shell(st.kind==='mc'?'🎯 Défi':'
 function memory(){const vals=shuffled(['🍎','⭐','🐶','🌈','🍎','⭐','🐶','🌈']);shell('🧠 Tour de la Mémoire',`<section class="card"><p>Retrouve les 4 paires. Une erreur de paire fait perdre 5 XP.</p><div class="memory">${vals.map((_,i)=>`<button class="mem" data-mem="${i}">?</button>`).join('')}</div><p id="gameMsg"></p></section>`);$('screen')._memory={vals,first:-1,lock:false,pairs:0}}
 function house(){shell('🏠 Ma maison',`<section class="card"><div class="big">🏠</div><h3>Ma chambre</h3><p>Décorations : ${S.decor.join(' ')} · Compagnon : ${S.pet}</p><h3>Décoration — 10 🪙</h3><div class="shop">${['📚','🪴','🖼️','🎮','🔬'].map(x=>`<button class="item" data-buy="${x}">${x}<br><small>10 🪙</small></button>`).join('')}</div><h3>🐾 Compagnon</h3><div class="shop">${['🐶','🐱','🐰','🐢','🐦'].map(x=>`<button class="item" data-pet="${x}">${x}</button>`).join('')}</div></section>`)}
 function work(){shell('📝 Mon Travail',`<section class="card"><p>Ton brouillon reste sur cet appareil.</p><div id="draft" class="work" contenteditable="true"></div><button class="btn success" data-work="save">💾 Enregistrer</button><button class="btn secondary" data-work="download">⬇️ Télécharger</button><button class="btn secondary" data-work="print">🖨️ Imprimer / PDF</button></section>`);$('draft').innerText=S.draft||''}
+function questionLibrary(){
+  const counts=Object.entries(QUESTION_BANK).map(([k,v])=>`<div class="library-row"><span>${escapeHtml(k)}</span><b>${v.length}</b></div>`).join("");
+  shell("📚 Banque de questions",`<section class="card"><h2>📚 Grande banque pédagogique</h2><p>Des centaines de défis différents pour éviter la répétition.</p>${counts}<div class="notice">🔄 Les questions utilisées sont mémorisées pendant la partie et le jeu renouvelle automatiquement la sélection.</div></section>`);
+}
 function profile(){shell('👤 Mon Profil',`<section class="card"><div class="avatar">${S.avatar}</div><h3>Niveau ${S.level}</h3><p>⭐ ${S.xp} XP · 🪙 ${S.coins} · 🎮 ${S.games} parties · ❤️ ${S.lives}/3</p><div class="progress"><i style="width:${(S.xp%200)/2}%"></i></div><h3>Choisis ton avatar</h3><div class="avatars">${['🧑🏿‍🎓','👩🏾‍🔬','🧑🏽‍🚀','👨🏿‍🎨','🧑🏻‍🏫','👩🏽‍🚀'].map(x=>`<button class="av ${x===S.avatar?'sel':''}" data-avatar="${x}">${x}</button>`).join('')}</div><h3>🏆 Trophées</h3>${S.trophies.map(x=>`<span class="badge">🏆 ${x}</span>`).join('')||'<p>Aucun trophée pour le moment.</p>'}<h3>🏅 Badges</h3>${S.badges.map(x=>`<span class="badge">🏅 ${x}</span>`).join('')||'<p>Aucun badge pour le moment.</p>'}</section>`)}
 function settings(){shell('⚙️ Paramètres',`<section class="card"><h3>ℹ️ À propos</h3><p><b>Bellabe Adssa — L’Aventure Scolaire</b></p><p>Une aventure éducative où l’on apprend en explorant, en jouant et en relevant des défis.</p><hr><p><b>Créé par maître Jules Enock</b></p><p>Contact : <a href="tel:+50940409680">+509 40409680</a></p></section><section class="card"><h3>💾 Données</h3><p>Ta progression est enregistrée sur cet appareil.</p></section>`)}
 function chase(){
@@ -132,7 +136,7 @@ function chase(){
     if(win){
       gain(40,15);$('chaseMsg').textContent='🏆 RATTRAPÉ ! Louibenson est enfin rattrapé ! +40 XP · +15 🪙';
     }else{
-      S.xp=Math.max(0,S.xp-10);S.combo=0;save();
+      S.xp=Math.max(0,S.xp-5);S.combo=0;save();
       $('chaseMsg').textContent='💨 Louibenson s’est échappé ! -10 XP. Accélère mieux la prochaine fois !';
     }
     const startBtn=document.querySelector('.chase-start');if(startBtn)startBtn.textContent='🔄 Recommencer';
