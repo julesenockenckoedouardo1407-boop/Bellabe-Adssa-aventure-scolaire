@@ -1,53 +1,18 @@
-# Bellabe Adssa v5.5 — L’Aventure Scolaire
+# Bellabe Adssa — L’Aventure Scolaire v6.0
 
-Version mobile GitHub, sans sous-dossiers.
+Version mobile GitHub (7 fichiers à la racine).
 
-## 🏃 Nouveau : Poursuis Louibenson
-- Course-poursuite tactile.
-- ⬅️ ➡️ pour changer de voie.
-- ⬆️ maintenu pour accélérer.
-- Jauge d'énergie ⚡.
-- Combo 🔥 pendant l'accélération sur la bonne voie.
-- Obstacles à éviter.
-- Décor de course animé pendant l'accélération.
-- Glisser à gauche/droite sur la piste pour changer de voie.
-- 30 secondes pour rattraper Louibenson.
-- Victoire : +30 XP et +10 pièces.
-- Échec : -10 XP.
+## Nouveautés
+- 🧰 Outils du savoir : calculatrice, conversions, géométrie, fractions, pourcentages, temps, prix/commerce, règle de trois.
+- 📚 Espace pédagogique : histoire d’Haïti de 1492 à 1804, héros et figures nationales, quiz historiques.
+- 🎮 Les aventures et mini-jeux de la version précédente sont conservés.
+- 🇭🇹 Parcours historique en 10 chapitres, avec repères et questions.
+- 📴 Fonctionnement hors ligne.
+- 🖼️ Icône PNG conservée.
 
-## Paramètres > À propos
+## Installation avec GitHub mobile
+Ne crée aucun dossier. Dans le dépôt, remplace les 7 fichiers existants : index.html, styles.css, app.js, manifest.json, sw.js, icon.png, README.md.
+Après publication GitHub Pages, recharge l’application. Si une ancienne version reste affichée, ferme l’onglet, rouvre le site et actualise.
+
 Créé par maître Jules Enock
 Contact : +509 40409680
-
-## Installation GitHub mobile
-Téléverser séparément à la racine :
-index.html, styles.css, app.js, manifest.json, sw.js, icon.png, README.md
-
-
-## v5.5 — Course façon endless runner
-- Décor qui défile et piste en perspective.
-- Course automatique vers l'avant.
-- ⬅️ / ➡️ changement de voie.
-- ⬆️ accélération maintenue avec énergie.
-- Obstacles et bonus à récupérer.
-- Combo et vitesse dynamique.
-- Contrôle tactile par glissement.
-- Objectif : rattraper Louibenson avant la fin du chrono.
-
-
-## v5.5 — Nouvelle icône + nettoyage des mini-jeux
-- Nouvelle icône officielle de Bellabe Adssa, basée sur le visuel fourni pour l'identité de l'application.
-- L'icône est `icon.png`, directement à la racine pour faciliter l'installation depuis GitHub mobile.
-- Le bouton **Poursuis Louibenson** est retiré de la liste des mini-jeux pour préparer une refonte complète ultérieure.
-- Les autres aventures et mini-jeux sont conservés.
-- La page Paramètres → À propos conserve :
-  **Créé par maître Jules Enock**
-  **Contact : +509 40409680**
-
-
-## v5.5 — Grande banque pédagogique
-- Banque de questions structurée par matière.
-- Français, mathématiques, sciences, histoire/géographie, logique, orthographe/vocabulaire et culture.
-- Sélection aléatoire avec mémoire des questions utilisées.
-- Nouvelle page **Banque de questions**.
-- Objectif : augmenter fortement la variété des aventures et mini-jeux.
